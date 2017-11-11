@@ -29,4 +29,4 @@ before_script:
 
 script:
   - ./gradlew check --continue --stacktrace
-  - ./gradlew connectedFlowDebugAndroidTest --continue --stacktrace
+  - ./gradlew connectedDebugAndroidTest --continue --stacktrace

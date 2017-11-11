@@ -2,6 +2,7 @@ package com.vaxapp.thingspeakviewer
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.vaxapp.thingspeakviewer.data.ApiService
 import com.vaxapp.thingspeakviewer.data.Channel
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showResult(channel: Channel) {
-
+        Log.d("MainActivity","channel" + channel.feeds)
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

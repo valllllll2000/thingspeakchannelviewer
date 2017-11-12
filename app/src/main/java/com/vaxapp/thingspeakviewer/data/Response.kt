@@ -1,15 +1,15 @@
 package com.vaxapp.thingspeakviewer.data
 
 data class ApiResponse (
-    val channel: Channel
+    val channel: Channel,
+    val feeds: List<Feed>
 )
 
 data class Channel (
     val field1:  String,
     val field2:  String,
     val description: String,
-    val updated_at: String,
-    val feeds: List<Feed>
+    val updated_at: String
 )
 
 data class Feed(

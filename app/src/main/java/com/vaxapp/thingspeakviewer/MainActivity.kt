@@ -1,23 +1,25 @@
 package com.vaxapp.thingspeakviewer
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.util.Log
-import android.widget.Toast
+import com.vaxapp.thingspeakviewer.data.ApiResponse
 import com.vaxapp.thingspeakviewer.data.ApiService
-import com.vaxapp.thingspeakviewer.data.Channel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import org.jetbrains.anko.toast
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AnkoLogger {
 
     val service by lazy {
         ApiService.create()
     }
+
     var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,23 +34,22 @@ class MainActivity : AppCompatActivity() {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                { result -> showResult(result.channel) },
+                                { result -> showResult(result) },
                                 { _ -> showError() }
                         )
     }
 
     private fun showError() {
         //make more Kotlin
-        Toast.makeText(this, "Error loading channel data", Toast.LENGTH_LONG).show();
+       toast("Error loading channel data2");
     }
 
-    private fun showResult(channel: Channel) {
-        Log.d("MainActivity","channel" + channel.feeds)
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun showResult(response: ApiResponse) {
+        info("channel " + response)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        getMenuInflater().inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.main, menu)
         return true;
     }
 
@@ -59,5 +60,10 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable?.dispose();
     }
 }

@@ -41,11 +41,14 @@
                     android:textSize="16sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:id="@+id/field1Label"
                     android:layout_weight="1"/>
 
             <TextView
-                    tools:text="55.6"
+                    tools:text="55.6 %"
+                    android:drawableLeft="@drawable/ic_icons8_humidity"
+                    android:gravity="center_vertical"
                     android:textSize="16sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,13 +70,16 @@
             <TextView
                     tools:text="Temperature (°C)"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/field2Label"
                     android:layout_weight="1"/>
 
             <TextView
-                    tools:text="21.1"
+                    tools:text="21.1 ºC"
+                    android:drawableLeft="@drawable/ic_icons8_temperature"
+                    android:gravity="center_vertical"
                     android:textSize="16sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

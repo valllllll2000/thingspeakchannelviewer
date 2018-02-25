@@ -13,8 +13,8 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.error
+import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,17 +23,17 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     private val url = "https://api.thingspeak.com/channels/298096/feeds.json?results=1"
 
-    val service by lazy {
+    private val service by lazy {
         ApiService.create()
     }
 
-    var disposable: Disposable? = null
+    private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        loadData();
+        loadData()
     }
 
     private fun loadData() {
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     private fun showResult(response: ApiResponse) {
         info("channel " + response)
-        descriptionTv.text = response.channel.description;
+        descriptionTv.text = response.channel.description
         field1Label.text = response.channel.field1
         field2Label.text = response.channel.field2
         field1Content.text = response.feeds[0].field1
@@ -63,10 +63,10 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun getFormattedDate(response: ApiResponse): String? {
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
         val date = simpleDateFormat.parse(response.channel.updated_at)
-        val localDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+        val localDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
         localDateFormat.timeZone = TimeZone.getDefault()
         return localDateFormat.format(date)
     }

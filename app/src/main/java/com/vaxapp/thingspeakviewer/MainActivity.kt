@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun showError(error: Throwable) {
-        toast("Error loading channel data")
+        toast(getString(R.string.error_loading_toast))
         error(error)
     }
 

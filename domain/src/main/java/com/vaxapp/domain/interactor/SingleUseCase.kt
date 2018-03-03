@@ -1,5 +1,7 @@
 package com.vaxapp.domain.interactor
 
+import com.vaxapp.domain.executor.PostExecutionThread
+import com.vaxapp.domain.executor.ThreadExecutor
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

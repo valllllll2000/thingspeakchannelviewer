@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -26,24 +24,37 @@ android {
             proguardFile getDefaultProguardFile('proguard-android.txt')
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$app_compat_version"
-    implementation "com.android.support:support-vector-drawable:$app_compat_version"
-    implementation "com.android.support:recyclerview-v7:$app_compat_version"
-    implementation "com.android.support:design:$app_compat_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    def appDependencies = rootProject.ext.appDependencies
+    def commonDependencies = rootProject.ext.commonDependencies
+    def testDependencies = rootProject.ext.commonTestDependencies
+    def androidTestDependencies = rootProject.ext.commonAndroidTestDependencies
+
+    implementation commonDependencies.kotlin
+    implementation commonDependencies.appCompat
+    implementation commonDependencies.rxAndroid
+    implementation commonDependencies.dagger
+    annotationProcessor commonDependencies.daggerCompiler
+    implementation appDependencies.vectorDrawable
+    implementation appDependencies.recyclerView
+    implementation appDependencies.design
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.anko
+    implementation "com.squareup.retrofit2:retrofit:2.3.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-    implementation 'org.jetbrains.anko:anko-common:0.8.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation project(':domain')
+
+    testImplementation testDependencies.jUnit
+
+    androidTestImplementation androidTestDependencies.supportTestRunner
+    androidTestImplementation androidTestDependencies.espressoCore
+
 }

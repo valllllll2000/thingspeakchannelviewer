@@ -36,7 +36,6 @@ dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
     def testDependencies = rootProject.ext.commonTestDependencies
     def androidTestDependencies = rootProject.ext.commonAndroidTestDependencies
-
     implementation commonDependencies.kotlin
     implementation commonDependencies.appCompat
     implementation commonDependencies.rxAndroid
@@ -47,14 +46,13 @@ dependencies {
     implementation appDependencies.design
     implementation appDependencies.constraintLayout
     implementation appDependencies.anko
-    implementation "com.squareup.retrofit2:retrofit:2.3.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-
     testImplementation testDependencies.jUnit
-
     androidTestImplementation androidTestDependencies.supportTestRunner
     androidTestImplementation androidTestDependencies.espressoCore
-
+    implementation project(':domain')
+    implementation project(':data')
 }

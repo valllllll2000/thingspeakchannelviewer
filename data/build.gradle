@@ -30,6 +30,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     def commonDependencies = rootProject.ext.commonDependencies
+    def dataDependencies = rootProject.ext.dataDependencies
     def testDependencies = rootProject.ext.commonTestDependencies
     def androidTestDependencies = rootProject.ext.commonAndroidTestDependencies
 
@@ -38,9 +39,15 @@ dependencies {
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.dagger
     annotationProcessor commonDependencies.daggerCompiler
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofitAdapter
+    implementation dataDependencies.retrofitGson
+    implementation dataDependencies.okhttp3Logging
 
     testImplementation testDependencies.jUnit
 
     androidTestImplementation androidTestDependencies.supportTestRunner
     androidTestImplementation androidTestDependencies.espressoCore
+
+    implementation project(':domain')
 }

@@ -59,7 +59,7 @@ ext {
     dataDependencies = [
             retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitAdapter: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            retrofitGson: "com.squareup.retrofit2:onverter-gson:${retrofitVersion}",
+            retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             okhttp3Logging: "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
     ]
 }

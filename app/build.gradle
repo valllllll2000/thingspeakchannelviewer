@@ -2,16 +2,30 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.vaxapp.thingspeakviewer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 4
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+    }
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('debug-key/debug.keystore')
+            storePassword 'android'
+        }
     }
     buildTypes {
         release {
@@ -22,6 +36,7 @@ android {
             proguardFile 'proguard-files/proguard-square-retrofit.pro'
             proguardFile 'proguard-files/proguard-support-v7-appcompat.pro'
             proguardFile getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -50,6 +65,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
+        transitive = true;
+    }
     testImplementation testDependencies.jUnit
     androidTestImplementation androidTestDependencies.supportTestRunner
     androidTestImplementation androidTestDependencies.espressoCore

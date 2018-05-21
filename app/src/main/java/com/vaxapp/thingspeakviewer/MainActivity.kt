@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.crashlytics.android.Crashlytics
 import com.vaxapp.thingspeakviewer.data.ApiResponse
 import com.vaxapp.thingspeakviewer.data.ApiService
+import io.fabric.sdk.android.Fabric
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -18,6 +20,9 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
+import com.crashlytics.android.core.CrashlyticsCore
+import com.vaxapp.thingspeakviewer.R.id.*
+
 
 class MainActivity : AppCompatActivity(), AnkoLogger {
 
@@ -31,6 +36,10 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val crashlyticsCore = CrashlyticsCore.Builder()
+                .disabled(true)
+                .build()
+        Fabric.with(this, Crashlytics.Builder().core(crashlyticsCore).build())
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         loadData()

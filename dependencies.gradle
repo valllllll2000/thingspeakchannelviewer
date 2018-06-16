@@ -10,7 +10,7 @@ ext {
     targetSdkVersion = 27
 
     //Libraries
-    kotlinVersion = '1.2.21'
+    kotlinVersion = '1.2.41'
     rxJavaVersion = '2.0.2'
     rxKotlinVersion = '2.1.0'
     rxAndroidVersion = '2.0.1'
@@ -19,9 +19,10 @@ ext {
     retrofitVersion = '2.3.0'
     supportVersion = '27.0.2'
     timberVersion = '4.5.1'
-    daggerVersion = '2.11'
     constraintVersion = '1.0.2'
     ankoVersion = '0.8.3'
+    koinVersion = '0.9.3'
+    crashlyticsVersion = '2.9.2@aar'
 
     //Tests
     junitVersion = '4.12'
@@ -30,36 +31,32 @@ ext {
     supportTestRunnerVersion = '1.0.1'
     espressoVersion = '3.0.1'
 
-    commonDependencies = [rxJava        : "io.reactivex:rxjava:${rxJavaVersion}",
-                          rxAndroid     : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-                          rxKotlin      : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-                          appCompat     : "com.android.support:appcompat-v7:${supportVersion}",
-                          daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
-                          dagger        : "com.google.dagger:dagger:${daggerVersion}",
-                          kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
-    ]
-
-    commonTestDependencies = [
+    testDependencies = [
             jUnit: "junit:junit:${junitVersion}",
     ]
 
-    commonAndroidTestDependencies = [
+    androidTestDependencies = [
             supportTestRunner: "com.android.support.test:runner:${supportTestRunnerVersion}",
             espressoCore     : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
     ]
 
     appDependencies = [
+            rxJava        : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid     : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxKotlin      : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            appCompat     : "com.android.support:appcompat-v7:${supportVersion}",
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
             vectorDrawable  : "com.android.support:support-vector-drawable:${supportVersion}",
             recyclerView    : "com.android.support:recyclerview-v7:${supportVersion}",
             design          : "com.android.support:design:${supportVersion}",
             constraintLayout: "com.android.support.constraint:constraint-layout:${constraintVersion}",
             anko: "org.jetbrains.anko:anko-common:${ankoVersion}",
-    ]
-
-    dataDependencies = [
+            koin: "org.koin:koin-android:${koinVersion}",
             retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitAdapter: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            okhttp3Logging: "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            adapterRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            converterGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            okHttp: "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            crashlytics: "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}"
     ]
 }

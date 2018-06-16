@@ -1,4 +1,4 @@
-package com.vaxapp.thingspeakviewer
+package com.vaxapp.thingspeakviewer.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.crashlytics.android.Crashlytics
+import com.crashlytics.android.core.CrashlyticsCore
+import com.vaxapp.thingspeakviewer.R
 import com.vaxapp.thingspeakviewer.data.ApiResponse
 import com.vaxapp.thingspeakviewer.data.ApiService
 import io.fabric.sdk.android.Fabric
@@ -20,8 +22,6 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
-import com.crashlytics.android.core.CrashlyticsCore
-import com.vaxapp.thingspeakviewer.R.id.*
 
 
 class MainActivity : AppCompatActivity(), AnkoLogger {

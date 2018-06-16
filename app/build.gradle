@@ -61,29 +61,28 @@ private Properties loadProperties(String fileName) {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     def appDependencies = rootProject.ext.appDependencies
-    def commonDependencies = rootProject.ext.commonDependencies
-    def testDependencies = rootProject.ext.commonTestDependencies
-    def androidTestDependencies = rootProject.ext.commonAndroidTestDependencies
-    implementation commonDependencies.kotlin
-    implementation commonDependencies.appCompat
-    implementation commonDependencies.rxAndroid
-    implementation commonDependencies.dagger
-    annotationProcessor commonDependencies.daggerCompiler
+    def testDependencies = rootProject.ext.testDependencies
+    def androidTestDependencies = rootProject.ext.androidTestDependencies
+
+    implementation appDependencies.kotlin
+    implementation appDependencies.appCompat
+    implementation appDependencies.rxAndroid
     implementation appDependencies.vectorDrawable
     implementation appDependencies.recyclerView
     implementation appDependencies.design
     implementation appDependencies.constraintLayout
     implementation appDependencies.anko
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
+    implementation appDependencies.koin
+    implementation appDependencies.retrofit
+    implementation appDependencies.adapterRxJava
+    implementation appDependencies.converterGson
+    implementation appDependencies.okHttp
+    implementation(appDependencies.crashlytics) {
         transitive = true;
     }
+
     testImplementation testDependencies.jUnit
+
     androidTestImplementation androidTestDependencies.supportTestRunner
     androidTestImplementation androidTestDependencies.espressoCore
-    implementation project(':domain')
-    implementation project(':data')
 }

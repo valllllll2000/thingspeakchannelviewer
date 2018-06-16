@@ -1,7 +1,8 @@
-package com.vaxapp.thingspeakviewer
+package com.vaxapp.thingspeakviewer.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.vaxapp.thingspeakviewer.R
 import kotlinx.android.synthetic.main.app_bar.*
 
 class SettingsActivity : AppCompatActivity() {

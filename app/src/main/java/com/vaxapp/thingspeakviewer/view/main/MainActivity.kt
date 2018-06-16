@@ -1,4 +1,4 @@
-package com.vaxapp.thingspeakviewer.view
+package com.vaxapp.thingspeakviewer.view.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import com.crashlytics.android.core.CrashlyticsCore
 import com.vaxapp.thingspeakviewer.R
 import com.vaxapp.thingspeakviewer.data.ApiResponse
 import com.vaxapp.thingspeakviewer.data.ApiService
+import com.vaxapp.thingspeakviewer.view.SettingsActivity
 import io.fabric.sdk.android.Fabric
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

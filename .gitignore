@@ -8,3 +8,7 @@
 .externalNativeBuild
 /app/release
 app/fabric.properties
+
+#fastlane
+Gemfile
+fastlane

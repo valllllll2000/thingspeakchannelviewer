@@ -1,20 +1,20 @@
 package com.vaxapp.thingspeakviewer.data
 
 import com.vaxapp.thingspeakviewer.BuildConfig
-import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Url
+import retrofit2.http.Query
 
 interface ApiService {
 
     //"https://api.thingspeak.com/channels/298096/feeds.json?results=1"
     @GET
-    fun fetchFields(@Url url: String): Observable<ApiResponse>
+    fun fetchFields(@Query("results") results: Int = 1): Single<ApiResponse>
 
     companion object {
 
@@ -27,7 +27,7 @@ interface ApiService {
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
             val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.thingspeak.com")
+                    .baseUrl("https://api.thingspeak.com/channels/298096/feeds.json")
                     .client(client)
                     .addConverterFactory(
                             GsonConverterFactory.create())

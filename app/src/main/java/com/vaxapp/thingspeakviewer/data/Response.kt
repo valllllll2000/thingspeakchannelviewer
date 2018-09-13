@@ -14,5 +14,6 @@ data class Channel (
 
 data class Feed(
         val field1: String,
-        val field2: String
+        val field2: String,
+        val created_at: String
 )

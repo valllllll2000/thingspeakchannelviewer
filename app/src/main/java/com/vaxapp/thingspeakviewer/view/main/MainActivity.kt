@@ -25,9 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), AnkoLogger {
-
-    private val url = "https://api.thingspeak.com/channels/298096/feeds.json?results=1"
+class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
 
     private val service by lazy {
         ApiService.create()
@@ -48,7 +46,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     private fun loadData() {
         disposable =
-                service.fetchFields(url)
+                service.fetchFields()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -63,19 +61,17 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun showResult(response: ApiResponse) {
-        info("channel " + response)
+        info("channel $response")
         descriptionTv.text = response.channel.description
-        field1Label.text = response.channel.field1
-        field2Label.text = response.channel.field2
-        field1Content.text = response.feeds[0].field1
-        field2Content.text = response.feeds[0].field2
+        field1Content.text = "${response.feeds[0].field1} %"
+        field2Content.text = "${response.feeds[0].field2} ºC"
         updatedTv.text = getString(R.string.last_updated_at, getFormattedDate(response))
     }
 
     private fun getFormattedDate(response: ApiResponse): String? {
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val date = simpleDateFormat.parse(response.channel.updated_at)
+        val date = simpleDateFormat.parse(response.feeds[0].created_at)
         val localDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
         localDateFormat.timeZone = TimeZone.getDefault()
         return localDateFormat.format(date)

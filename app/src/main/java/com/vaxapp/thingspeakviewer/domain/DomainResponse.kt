@@ -15,5 +15,6 @@ data class DomainChannel (
 
 data class DomainFeed(
         val field1: String,
-        val field2: String
+        val field2: String,
+        val created_at: String
 )

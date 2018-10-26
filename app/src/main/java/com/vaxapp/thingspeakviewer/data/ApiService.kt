@@ -5,7 +5,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import com.vaxapp.thingspeakviewer.BuildConfig
 import io.reactivex.Single
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,36 +21,37 @@ interface ApiService {
 
     companion object {
 
-        fun create(context: Context): ApiService {
+        fun create(): ApiService {
 
             val interceptor = HttpLoggingInterceptor()
             if (BuildConfig.DEBUG) {
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
             }
-            //val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-            val cacheSize = (5 * 1024 * 1024).toLong()
-            val myCache = Cache(context.cacheDir, cacheSize)
-            val client = OkHttpClient.Builder()
-                    .addInterceptor(interceptor)
-                    // Specify the cache we created earlier.
-                    .cache(myCache)
-                    // Add an Interceptor to the OkHttpClient.
-                    .addInterceptor { chain ->
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+           // val cacheSize = (5 * 1024 * 1024).toLong()
+            //val myCache = Cache(context.cacheDir, cacheSize)
+//            val client = OkHttpClient.Builder()
+//                    .addInterceptor(interceptor)
+//                    // Specify the cache we created earlier.
+//                    //.cache(myCache)
+//                    // Add an Interceptor to the OkHttpClient.
+//                    .addInterceptor { chain ->
 
                         /*
                         *  Leveraging the advantage of using Kotlin,
                         *  we initialize the request and change its header depending on whether
                         *  the device is connected to Internet or not.
                         */
-                        val request = when {
-                            hasNetwork(context) -> createRecentCacheRequest(chain.request())
-                            else -> createOlderCacheRequest(chain.request())
-                        }
+//                        val request = when {
+//                            hasNetwork(context) -> createRecentCacheRequest(chain.request())
+//                            else ->
+//                                createOlderCacheRequest(chain.request())
+//                        }
 
                         // Add the modified request to the chain.
-                        chain.proceed(request)
-                    }
-                    .build()
+//                        chain.proceed(createRecentCacheRequest(chain.request()))
+//                    }
+//                    .build()
 
             val retrofit = Retrofit.Builder()
                     .baseUrl("https://api.thingspeak.com/channels/298096/")

@@ -14,7 +14,7 @@ class DataOfficeWeatherRepository(private val dataSource: OfficeWeatherCloudData
         return dataSource.fetchFields().map { it ->
             DomainResponse(
                     DomainChannel(it.channel.field1, it.channel.field2, it.channel.description, it.channel.updated_at),
-                    it.feeds.map { DomainFeed(it.field1, it.field2) })
+                    it.feeds.map { DomainFeed(it.field1, it.field2, it.created_at) })
         }
     }
 }

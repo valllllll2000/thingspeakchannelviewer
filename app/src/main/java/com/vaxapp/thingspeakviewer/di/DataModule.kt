@@ -14,7 +14,7 @@ val dataModule = applicationContext {
 }
 
 fun provideApiService(): ApiService {
-    return ApiService.create();
+    return ApiService.create()
 }
 
 fun provideOfficeWeatherDataSource(get: ApiService): OfficeWeatherCloudDataSource {

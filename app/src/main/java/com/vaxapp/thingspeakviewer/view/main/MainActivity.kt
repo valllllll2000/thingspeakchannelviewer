@@ -5,78 +5,65 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.core.CrashlyticsCore
 import com.vaxapp.thingspeakviewer.R
-import com.vaxapp.thingspeakviewer.data.ApiResponse
-import com.vaxapp.thingspeakviewer.data.ApiService
 import com.vaxapp.thingspeakviewer.view.SettingsActivity
-import io.fabric.sdk.android.Fabric
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
-import java.text.SimpleDateFormat
-import java.util.*
+import org.koin.android.ext.android.inject
 
 
 class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
 
-    private val service by lazy {
-        ApiService.create()
-    }
+    private val presenter: MainPresenter by inject()
 
     private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val crashlyticsCore = CrashlyticsCore.Builder()
-                .disabled(true)
-                .build()
-        Fabric.with(this, Crashlytics.Builder().core(crashlyticsCore).build())
+
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        loadData()
+        presenter.view = this
+        presenter.onViewReady()
+//        loadData()
     }
 
-    private fun loadData() {
-        disposable =
-                service.fetchFields()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                { result -> showResult(result) },
-                                { error -> showError(error) }
-                        )
-    }
+//    private fun loadData() {
+//        disposable =
+//                service.fetchFields()
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(
+//                                { result -> showResult(result) },
+//                                { error -> showError(error) }
+//                        )
+//    }
 
-    private fun showError(error: Throwable) {
+    override fun showError(error: Throwable) {
         toast(getString(R.string.error_loading_toast))
         error(error)
     }
 
-    private fun showResult(response: ApiResponse) {
+    override fun showLoading() {
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoading() {
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun display(response: ViewResponse) {
         info("channel $response")
-        descriptionTv.text = response.channel.description
-        field1Content.text = "${response.feeds[0].field1} %"
-        field2Content.text = "${response.feeds[0].field2} ºC"
-        updatedTv.text = getString(R.string.last_updated_at, getFormattedDate(response))
+        descriptionTv.text = response.description
+        field1Content.text = "${response.field1Value} %"
+        field2Content.text = "${response.field2Value} ºC"
+        updatedTv.text = getString(R.string.last_updated_at, response.formattedDate)
     }
-
-    private fun getFormattedDate(response: ApiResponse): String? {
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val date = simpleDateFormat.parse(response.feeds[0].created_at)
-        val localDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
-        localDateFormat.timeZone = TimeZone.getDefault()
-        return localDateFormat.format(date)
-    }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)

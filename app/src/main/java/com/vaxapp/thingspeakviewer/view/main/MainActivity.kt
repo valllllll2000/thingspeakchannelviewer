@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import com.vaxapp.thingspeakviewer.R
 import com.vaxapp.thingspeakviewer.view.SettingsActivity
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar.*
 import org.jetbrains.anko.AnkoLogger
@@ -21,8 +20,6 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
 
     private val presenter: MainPresenter by inject()
 
-    private var disposable: Disposable? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,19 +27,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
         setSupportActionBar(toolbar)
         presenter.view = this
         presenter.onViewReady()
-//        loadData()
     }
-
-//    private fun loadData() {
-//        disposable =
-//                service.fetchFields()
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(
-//                                { result -> showResult(result) },
-//                                { error -> showError(error) }
-//                        )
-//    }
 
     override fun showError(error: Throwable) {
         toast(getString(R.string.error_loading_toast))
@@ -81,6 +66,6 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable?.dispose()
+        presenter.dispose()
     }
 }

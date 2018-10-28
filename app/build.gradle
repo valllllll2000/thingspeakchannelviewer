@@ -73,7 +73,6 @@ dependencies {
     implementation appDependencies.constraintLayout
     implementation appDependencies.anko
     implementation appDependencies.koin
-    implementation appDependencies.koinAndroid
     implementation appDependencies.retrofit
     implementation appDependencies.adapterRxJava
     implementation appDependencies.converterGson

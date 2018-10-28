@@ -5,9 +5,9 @@ allprojects {
 }
 
 ext {
-    compileSdkVersion = 27
+    compileSdkVersion = 28
     minSdkVersion = 15
-    targetSdkVersion = 27
+    targetSdkVersion = 28
 
     //Libraries
     kotlinVersion = '1.2.41'
@@ -52,7 +52,6 @@ ext {
             constraintLayout: "com.android.support.constraint:constraint-layout:${constraintVersion}",
             anko: "org.jetbrains.anko:anko-common:${ankoVersion}",
             koin: "org.koin:koin-android:${koinVersion}",
-            koinAndroid: "org.koin:koin-android-scope:${koinVersion}",
             retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             adapterRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             converterGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",

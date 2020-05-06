@@ -4,7 +4,6 @@ import com.vaxapp.thingspeakviewer.domain.DomainResponse
 import com.vaxapp.thingspeakviewer.domain.GetOfficeWeatherUseCase
 import io.reactivex.disposables.Disposable
 
-
 class MainPresenter(private val useCase: GetOfficeWeatherUseCase, private val mapper: ViewResponseMapper) {
 
     var view: MainView? = null

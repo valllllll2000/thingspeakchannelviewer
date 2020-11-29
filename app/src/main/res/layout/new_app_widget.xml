@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/section_update"
+        style="@style/AppWidgetSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            tools:text="Sensor data from RPI zero"
+            style="@style/AppWidgetText"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptionTv"/>
+
+
+        <TextView
+            tools:text="55.6 %"
+            style="@style/AppWidgetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/field1Content"/>
+
+
+        <TextView
+            tools:text="21.1 ºC"
+            style="@style/AppWidgetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/field2Content"/>
+
+
+        <TextView
+            tools:text="Last updated: June 15th 2017"
+            style="@style/AppWidgetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/updatedTv"/>
+    </LinearLayout>
+</RelativeLayout>

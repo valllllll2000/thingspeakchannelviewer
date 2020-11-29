@@ -16,7 +16,7 @@
             android:id="@+id/constraintLayout">
 
         <TextView
-                tools:text="Sensor data from RPI zero"
+                tools:text="@string/description"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:gravity="center_horizontal"

@@ -3,12 +3,13 @@ package com.vaxapp.thingspeakviewer.di
 import com.vaxapp.thingspeakviewer.view.main.MainPresenter
 import com.vaxapp.thingspeakviewer.view.main.ViewResponseMapper
 import java.text.SimpleDateFormat
-import org.koin.dsl.module.applicationContext
 import java.util.Locale
 import java.util.TimeZone
+import org.koin.dsl.module.applicationContext
 
 val viewModule = applicationContext {
-    bean { MainPresenter(get(), provideGetViewResponseMapper()) }
+    bean { MainPresenter(get(), get()) }
+    bean { provideGetViewResponseMapper() }
 }
 
 fun provideGetViewResponseMapper(): ViewResponseMapper {

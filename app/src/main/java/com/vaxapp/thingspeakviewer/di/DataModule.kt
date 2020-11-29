@@ -8,7 +8,6 @@ import com.vaxapp.thingspeakviewer.domain.OfficeWeatherRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.applicationContext
 
-
 val dataModule = applicationContext {
     bean { provideOfficeWeatherRepository(get()) }
     bean { provideOfficeWeatherDataSource(get()) }

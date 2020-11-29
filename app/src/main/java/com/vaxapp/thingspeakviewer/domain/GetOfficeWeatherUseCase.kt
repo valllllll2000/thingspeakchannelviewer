@@ -4,8 +4,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-
-class GetOfficeWeatherUseCase(val repository: OfficeWeatherRepository) {
+class GetOfficeWeatherUseCase(private val repository: OfficeWeatherRepository) {
 
     fun getOfficeWeather(): Single<DomainResponse> {
         return repository.getOfficeWeather().subscribeOn(Schedulers.io())

@@ -6,10 +6,9 @@ import com.vaxapp.thingspeakviewer.domain.DomainResponse
 import com.vaxapp.thingspeakviewer.domain.OfficeWeatherRepository
 import io.reactivex.Single
 
-
 class DataOfficeWeatherRepository(private val dataSource: OfficeWeatherCloudDataSource) : OfficeWeatherRepository {
 
-    //TODO: add mappers
+    // TODO: add mappers
     override fun getOfficeWeather(): Single<DomainResponse> {
         return dataSource.fetchFields().map { it ->
             DomainResponse(

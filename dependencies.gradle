@@ -41,21 +41,21 @@ ext {
     ]
 
     appDependencies = [
-            rxJava        : "io.reactivex:rxjava:${rxJavaVersion}",
-            rxAndroid     : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            rxKotlin      : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            appCompat     : "androidx.appcompat:appcompat:${supportVersion}",
-            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            rxJava          : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid       : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxKotlin        : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            appCompat       : "androidx.appcompat:appcompat:${supportVersion}",
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
             vectorDrawable  : "androidx.vectordrawable:vectordrawable:${supportVersion}",
             recyclerView    : "androidx.recyclerview:recyclerview:${supportVersion}",
-            material          : "com.google.android.material:material:${supportVersion}",
+            material        : "com.google.android.material:material:${supportVersion}",
             constraintLayout: "androidx.constraintlayout:constraintlayout:${constraintVersion}",
-            anko: "org.jetbrains.anko:anko-common:${ankoVersion}",
-            koin: "org.koin:koin-android:${koinVersion}",
-            retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            adapterRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            converterGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            okHttp: "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
-            crashlytics: "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}"
+            anko            : "org.jetbrains.anko:anko-common:${ankoVersion}",
+            koin            : "org.koin:koin-android:${koinVersion}",
+            retrofit        : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            adapterRxJava   : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            converterGson   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            okHttp          : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            crashlytics     : "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}"
     ]
 }

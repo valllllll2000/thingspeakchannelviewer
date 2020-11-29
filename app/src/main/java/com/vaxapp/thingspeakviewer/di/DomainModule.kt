@@ -4,7 +4,6 @@ import com.vaxapp.thingspeakviewer.domain.GetOfficeWeatherUseCase
 import com.vaxapp.thingspeakviewer.domain.OfficeWeatherRepository
 import org.koin.dsl.module.applicationContext
 
-
 val domainModule = applicationContext {
     bean { provideGetOfficeUseCase(get()) }
 }

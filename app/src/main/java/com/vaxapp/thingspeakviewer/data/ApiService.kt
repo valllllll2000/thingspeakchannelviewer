@@ -18,7 +18,7 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    //"https://api.thingspeak.com/channels/298096/feeds.json?results=1"
+    // "https://api.thingspeak.com/channels/298096/feeds.json?results=1"
     @GET("https://api.thingspeak.com/channels/298096/feeds.json?results=1")
     fun fetchFields(/*@Query("results") results: Int = 1*/): Single<ApiResponse>
 
@@ -38,14 +38,13 @@ interface ApiService {
             }
         }
 
-
         fun create(context: Context): ApiService {
 
             val interceptor = HttpLoggingInterceptor()
             if (BuildConfig.DEBUG) {
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
             }
-            //val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            // val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val cacheSize = (5 * 1024 * 1024).toLong()
             val myCache = Cache(context.cacheDir, cacheSize)
             val client = OkHttpClient.Builder()
@@ -90,7 +89,7 @@ interface ApiService {
          *  The 'max-stale' attribute is responsible for this behavior.
          *  The 'only-if-cached' attribute indicates to not retrieve new data; fetch the cache only instead.
          */
-        private fun createOlderCacheRequest(request: Request) : Request {
+        private fun createOlderCacheRequest(request: Request): Request {
             Log.d("ApiService", "createOlderCacheRequest")
             return request.newBuilder()
                     .removeHeader("Pragma")
@@ -122,7 +121,4 @@ interface ApiService {
             return isConnected
         }
     }
-
-
-
 }

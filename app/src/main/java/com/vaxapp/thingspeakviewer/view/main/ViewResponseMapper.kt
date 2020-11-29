@@ -4,7 +4,6 @@ import com.vaxapp.thingspeakviewer.domain.DomainFeed
 import com.vaxapp.thingspeakviewer.domain.DomainResponse
 import java.text.SimpleDateFormat
 
-
 class ViewResponseMapper(private val serverDateFormat: SimpleDateFormat, private val localDateFormat: SimpleDateFormat) {
 
     internal fun toViewResponse(response: DomainResponse): ViewResponse {

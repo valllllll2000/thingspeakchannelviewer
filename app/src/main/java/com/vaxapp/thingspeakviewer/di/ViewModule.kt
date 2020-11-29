@@ -2,10 +2,8 @@ package com.vaxapp.thingspeakviewer.di
 
 import com.vaxapp.thingspeakviewer.view.main.MainPresenter
 import com.vaxapp.thingspeakviewer.view.main.ViewResponseMapper
-import org.koin.dsl.module.applicationContext
 import java.text.SimpleDateFormat
-import java.util.*
-
+import org.koin.dsl.module.applicationContext
 
 val viewModule = applicationContext {
     bean { MainPresenter(get(), provideGetViewResponseMapper()) }

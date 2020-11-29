@@ -15,7 +15,6 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
-
 class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
 
     private val presenter: MainPresenter by inject()
@@ -35,11 +34,11 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
     }
 
     override fun showLoading() {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun hideLoading() {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun display(response: ViewResponse) {

@@ -7,8 +7,7 @@ import com.vaxapp.thingspeakviewer.di.officeWeatherAppModules
 import io.fabric.sdk.android.Fabric
 import org.koin.android.ext.android.startKoin
 
-
-class OfficeWeatherApp: Application() {
+class OfficeWeatherApp : Application() {
 
     override fun onCreate() {
         super.onCreate()

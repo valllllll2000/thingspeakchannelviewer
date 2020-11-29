@@ -4,6 +4,8 @@ import com.vaxapp.thingspeakviewer.view.main.MainPresenter
 import com.vaxapp.thingspeakviewer.view.main.ViewResponseMapper
 import java.text.SimpleDateFormat
 import org.koin.dsl.module.applicationContext
+import java.util.Locale
+import java.util.TimeZone
 
 val viewModule = applicationContext {
     bean { MainPresenter(get(), provideGetViewResponseMapper()) }

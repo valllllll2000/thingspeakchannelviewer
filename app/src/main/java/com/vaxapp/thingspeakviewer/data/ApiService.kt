@@ -17,7 +17,7 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("https://api.thingspeak.com/channels/$CHANNEL_ID/feeds.json?results=1")
+    @GET("https://api.thingspeak.com/channels/$CHANNEL_ID_OLD/feeds.json?results=1")
     fun fetchFields(): Single<ApiResponse>
 
     companion object {

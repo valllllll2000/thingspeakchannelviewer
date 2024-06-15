@@ -46,11 +46,8 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
     }
 
     override fun displayNotification() {
-        val notificationManager = NotificationManagerCompat.from(this)
-        if (notificationManager.areNotificationsEnabled()) {
-            info("display notification")
-            notificationHelper.showNotification(this)
-        }
+        info("ask to display notification")
+        notificationHelper.showNotification(this)
     }
 
     override fun showLoading() {

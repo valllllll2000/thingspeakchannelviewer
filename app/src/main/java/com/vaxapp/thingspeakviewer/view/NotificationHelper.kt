@@ -20,11 +20,14 @@ class NotificationHelper {
     }
 
     fun showNotification(context: Context) {
-        createNotificationChannel(context) // Create the notification channel if needed
-        val notification = buildNotification(context)
-        with(NotificationManagerCompat.from(context)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(NOTIFICATION_ID, notification)
+        val notificationManager = NotificationManagerCompat.from(context)
+        if (notificationManager.areNotificationsEnabled()) {
+            createNotificationChannel(context) // Create the notification channel if needed
+            val notification = buildNotification(context)
+            with(NotificationManagerCompat.from(context)) {
+                // notificationId is a unique int for each notification that you must define
+                notify(NOTIFICATION_ID, notification)
+            }
         }
     }
 

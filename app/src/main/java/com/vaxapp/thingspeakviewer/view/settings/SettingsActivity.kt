@@ -1,5 +1,6 @@
 package com.vaxapp.thingspeakviewer.view.settings
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,12 +20,29 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.vaxapp.thingspeakviewer.R
 import com.vaxapp.thingspeakviewer.view.settings.ui.theme.ThingspeakchannelviewerTheme
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import android.Manifest
+import androidx.activity.result.contract.ActivityResultContracts
 
 class SettingsActivity : ComponentActivity() {
+
     private val viewModel: SettingsViewModel by viewModel<SettingsViewModel>()
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            viewModel.onSettingChanged(false)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,6 +55,24 @@ class SettingsActivity : ComponentActivity() {
                 }
             }
         }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.displayNotification.collect { enabledNotification ->
+                    if (enabledNotification) {
+                        handleNotificationPermissions()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleNotificationPermissions() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
     }
 }
 
@@ -48,27 +84,24 @@ fun SettingsView(modifier: Modifier = Modifier, viewModel: SettingsViewModel) {
     )
     var checkedState = viewModel.displayNotification.collectAsState().value
 
-    Row(
-        modifier = Modifier
-            .semantics {
-                stateDescription = if (checkedState) {
-                    "Enabled"
-                } else {
-                    "Disabled"
-                }
-                role = androidx.compose.ui.semantics.Role.Checkbox
+    Row(modifier = Modifier
+        .semantics {
+            stateDescription = if (checkedState) {
+                "Enabled"
+            } else {
+                "Disabled"
             }
-            .padding(start = 16.dp, top = 72.dp, bottom = 8.dp, end = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+            role = androidx.compose.ui.semantics.Role.Checkbox
+        }
+        .padding(start = 16.dp, top = 72.dp, bottom = 8.dp, end = 16.dp),
+        verticalAlignment = Alignment.CenterVertically) {
 
         Checkbox(checked = checkedState, onCheckedChange = {
             checkedState = it
             viewModel.onSettingChanged(it)
         })
         Text(
-            text = "Notify channel data expired",
-            modifier = Modifier.padding(start = 8.dp)
+            text = "Notify channel data expired", modifier = Modifier.padding(start = 8.dp)
         )
     }
 }

@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.compose.animation.core.infiniteRepeatable
+import androidx.core.app.NotificationManagerCompat
 import com.vaxapp.thingspeakviewer.R
 import com.vaxapp.thingspeakviewer.view.NotificationHelper
 import com.vaxapp.thingspeakviewer.view.settings.SettingsActivity
@@ -46,8 +46,11 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
     }
 
     override fun displayNotification() {
-        info("display notification")
-        notificationHelper.showNotification(this)
+        val notificationManager = NotificationManagerCompat.from(this)
+        if (notificationManager.areNotificationsEnabled()) {
+            info("display notification")
+            notificationHelper.showNotification(this)
+        }
     }
 
     override fun showLoading() {

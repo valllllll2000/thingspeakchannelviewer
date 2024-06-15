@@ -23,6 +23,7 @@ interface ApiService {
     companion object {
 
         private const val CHANNEL_ID = 2405092
+        private const val CHANNEL_ID_OLD = 298096
 
         private val REWRITE_RESPONSE_INTERCEPTOR = Interceptor { chain ->
             val originalResponse = chain.proceed(chain.request())
@@ -54,8 +55,7 @@ interface ApiService {
                     .addInterceptor { chain ->
 
                         /*
-                        *  Leveraging the advantage of using Kotlin,
-                        *  we initialize the request and change its header depending on whether
+                        *  We initialize the request and change its header depending on whether
                         *  the device is connected to Internet or not.
                         */
                         val request = when {

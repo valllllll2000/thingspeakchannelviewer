@@ -81,7 +81,7 @@ class WeatherAppWidget : AppWidgetProvider(), KoinComponent {
         views.setTextViewText(R.id.field1Content, "${response.field1Value} %")
         views.setTextViewText(R.id.field2Content, "${response.field2Value} ºC")
         views.setTextViewText(R.id.updatedTv,
-            context.getString(R.string.last_updated_at, response.formattedDate))
+            context.getString(R.string.last_updated_at, response.channelUpdateDate))
 
         val intentUpdate = Intent(context, WeatherAppWidget::class.java)
         intentUpdate.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE

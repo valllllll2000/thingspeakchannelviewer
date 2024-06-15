@@ -6,4 +6,5 @@ interface MainView {
     fun display(response: ViewResponse)
     fun hideLoading()
     fun showError(error: Throwable)
+    fun displayNotification()
 }

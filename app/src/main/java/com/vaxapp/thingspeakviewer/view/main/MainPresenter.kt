@@ -1,10 +1,20 @@
 package com.vaxapp.thingspeakviewer.view.main
 
 import com.vaxapp.thingspeakviewer.domain.DomainResponse
+import com.vaxapp.thingspeakviewer.domain.GetNotificationPreferenceUseCase
 import com.vaxapp.thingspeakviewer.domain.GetOfficeWeatherUseCase
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import java.util.Date
+import kotlin.coroutines.CoroutineContext
 
-class MainPresenter(private val useCase: GetOfficeWeatherUseCase, private val mapper: ViewResponseMapper) {
+class MainPresenter(
+    private val useCase: GetOfficeWeatherUseCase,
+    private val mapper: ViewResponseMapper,
+    private val getNotificationPreferenceUseCase: GetNotificationPreferenceUseCase,
+    private val coroutineContext: CoroutineContext
+) {
 
     var view: MainView? = null
     private var disposable: Disposable? = null
@@ -12,8 +22,22 @@ class MainPresenter(private val useCase: GetOfficeWeatherUseCase, private val ma
     fun onViewReady() {
         view?.showLoading()
         disposable = useCase.getOfficeWeather()
-                .subscribe({ result -> display(result) },
-                        { error -> view?.showError(error) })
+            .subscribe({ result -> useResult(result) },
+                { error -> view?.showError(error) })
+    }
+
+    private fun useResult(result: DomainResponse) {
+        val channelUpdateTime = result.feeds.first().createdAt?.time ?: 0L
+        if (Date().time - channelUpdateTime > 360000L) {
+            CoroutineScope(coroutineContext).launch {
+                val displayNotification =
+                    getNotificationPreferenceUseCase.getNotificationPreference()
+                if (displayNotification) {
+                    view?.displayNotification()
+                }
+            }
+        }
+        display(result)
     }
 
     private fun display(result: DomainResponse) {

@@ -8,7 +8,9 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.compose.animation.core.infiniteRepeatable
 import com.vaxapp.thingspeakviewer.R
+import com.vaxapp.thingspeakviewer.view.NotificationHelper
 import com.vaxapp.thingspeakviewer.view.settings.SettingsActivity
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
@@ -19,6 +21,7 @@ import org.koin.android.ext.android.inject
 class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
 
     private val presenter: MainPresenter by inject()
+    private val notificationHelper by inject<NotificationHelper>()
     private lateinit var descriptionTv: TextView
     private lateinit var field1Content: TextView
     private lateinit var field2Content: TextView
@@ -42,6 +45,11 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
         error(error)
     }
 
+    override fun displayNotification() {
+        info("display notification")
+        notificationHelper.showNotification(this)
+    }
+
     override fun showLoading() {
         // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -56,7 +64,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
         descriptionTv.text = response.description
         field1Content.text = "${response.field1Value} %"
         field2Content.text = "${response.field2Value} ºC"
-        updatedTv.text = getString(R.string.last_updated_at, response.formattedDate)
+        updatedTv.text = getString(R.string.last_updated_at, response.channelUpdateDate)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

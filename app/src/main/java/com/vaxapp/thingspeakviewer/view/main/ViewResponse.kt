@@ -4,5 +4,5 @@ data class ViewResponse(
     val description: String,
     val field1Value: String,
     val field2Value: String,
-    val formattedDate: String
+    val channelUpdateDate: String
 )

@@ -25,8 +25,8 @@ import com.vaxapp.thingspeakviewer.R
 import com.vaxapp.thingspeakviewer.domain.DomainResponse
 import com.vaxapp.thingspeakviewer.domain.GetOfficeWeatherUseCase
 import com.vaxapp.thingspeakviewer.view.main.ViewResponseMapper
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * App widget provider class, to handle update broadcast intents and updates

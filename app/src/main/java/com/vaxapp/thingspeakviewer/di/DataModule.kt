@@ -6,12 +6,13 @@ import com.vaxapp.thingspeakviewer.data.DataOfficeWeatherRepository
 import com.vaxapp.thingspeakviewer.data.OfficeWeatherCloudDataSource
 import com.vaxapp.thingspeakviewer.domain.OfficeWeatherRepository
 import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module.applicationContext
+import org.koin.core.module.Module
+import org.koin.dsl.module
 
-val dataModule = applicationContext {
-    bean { provideOfficeWeatherRepository(get()) }
-    bean { provideOfficeWeatherDataSource(get()) }
-    bean { provideApiService(androidContext()) }
+val dataModule: Module = module {
+    single { provideOfficeWeatherRepository(get()) }
+    single { provideOfficeWeatherDataSource(get()) }
+    single { provideApiService(androidContext()) }
 }
 
 fun provideApiService(context: Context): ApiService {

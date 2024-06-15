@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.vaxapp.thingspeakviewer.R
-import com.vaxapp.thingspeakviewer.view.SettingsActivity
+import com.vaxapp.thingspeakviewer.view.settings.SettingsActivity
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
 import org.jetbrains.anko.info

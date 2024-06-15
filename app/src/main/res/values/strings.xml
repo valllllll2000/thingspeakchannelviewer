@@ -16,4 +16,5 @@
     <!-- Format string for the date & count text view -->
     <string name="date_count_format">%1$d @%2$s</string>
     <string name="description">Sensor data from RPI zero</string>
+    <string name="settings_label">Settings</string>
 </resources>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".OfficeWeatherApp"
         android:allowBackup="true"
@@ -10,7 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".view.main.MainActivity"
+        <activity
+            android:name=".view.settings.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBarMaterial" />
+        <activity
+            android:name=".view.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,15 +27,12 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".view.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="68e0f4750b5ed8a804ecb58432ef446835353e5b" />
 
-        <receiver android:name="com.vaxapp.thingspeakviewer.widget.WeatherAppWidget"
+        <receiver
+            android:name=".widget.WeatherAppWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -37,8 +42,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
-
     </application>
-
 
 </manifest>

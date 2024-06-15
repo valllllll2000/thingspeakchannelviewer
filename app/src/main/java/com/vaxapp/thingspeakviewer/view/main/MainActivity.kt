@@ -1,14 +1,15 @@
 package com.vaxapp.thingspeakviewer.view.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.vaxapp.thingspeakviewer.R
 import com.vaxapp.thingspeakviewer.view.SettingsActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
 import org.jetbrains.anko.info
@@ -18,12 +19,20 @@ import org.koin.android.ext.android.inject
 class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
 
     private val presenter: MainPresenter by inject()
+    private lateinit var descriptionTv: TextView
+    private lateinit var field1Content: TextView
+    private lateinit var field2Content: TextView
+    private lateinit var updatedTv: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        descriptionTv = findViewById(R.id.descriptionTv)
+        field1Content = findViewById(R.id.field1Content)
+        field2Content = findViewById(R.id.field2Content)
+        updatedTv = findViewById(R.id.updatedTv)
         presenter.view = this
         presenter.onViewReady()
     }
@@ -41,6 +50,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
         // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    @SuppressLint("SetTextI18n")
     override fun display(response: ViewResponse) {
         info("channel $response")
         descriptionTv.text = response.description

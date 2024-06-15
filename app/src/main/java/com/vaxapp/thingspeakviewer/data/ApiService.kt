@@ -3,7 +3,6 @@ package com.vaxapp.thingspeakviewer.data
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.util.Log
 import com.vaxapp.thingspeakviewer.BuildConfig
 import io.reactivex.Single
 import okhttp3.Cache
@@ -18,11 +17,12 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    // "https://api.thingspeak.com/channels/298096/feeds.json?results=1"
-    @GET("https://api.thingspeak.com/channels/298096/feeds.json?results=1")
-    fun fetchFields(/*@Query("results") results: Int = 1*/): Single<ApiResponse>
+    @GET("https://api.thingspeak.com/channels/$CHANNEL_ID/feeds.json?results=1")
+    fun fetchFields(): Single<ApiResponse>
 
     companion object {
+
+        private const val CHANNEL_ID = 2405092
 
         private val REWRITE_RESPONSE_INTERCEPTOR = Interceptor { chain ->
             val originalResponse = chain.proceed(chain.request())
@@ -44,7 +44,6 @@ interface ApiService {
             if (BuildConfig.DEBUG) {
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
             }
-            // val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val cacheSize = (5 * 1024 * 1024).toLong()
             val myCache = Cache(context.cacheDir, cacheSize)
             val client = OkHttpClient.Builder()
@@ -71,7 +70,7 @@ interface ApiService {
                     .build()
 
             val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.thingspeak.com/channels/298096/")
+                    .baseUrl("https://api.thingspeak.com/channels/$CHANNEL_ID/")
                     .client(client)
                     .addConverterFactory(
                             GsonConverterFactory.create())
@@ -90,7 +89,6 @@ interface ApiService {
          *  The 'only-if-cached' attribute indicates to not retrieve new data; fetch the cache only instead.
          */
         private fun createOlderCacheRequest(request: Request): Request {
-            Log.d("ApiService", "createOlderCacheRequest")
             return request.newBuilder()
                     .removeHeader("Pragma")
                     .header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7)
@@ -104,7 +102,6 @@ interface ApiService {
          *  The 'max-age' attribute is responsible for this behavior.
          */
         private fun createRecentCacheRequest(request: Request): Request {
-            Log.d("ApiService", "createRecentCacheRequest")
             return request.newBuilder()
                     .removeHeader("Pragma")
                     .header("Cache-Control", "public, max-age=" + 5)

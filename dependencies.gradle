@@ -1,13 +1,13 @@
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 
 ext {
-    compileSdkVersion = 28
-    minSdkVersion = 15
-    targetSdkVersion = 28
+    compileSdkVersion = 34
+    minSdkVersion = 21
+    targetSdkVersion = 34
 
     //Libraries
     kotlinVersion = '1.2.41'

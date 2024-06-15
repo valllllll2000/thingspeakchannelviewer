@@ -1,21 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'io.fabric'
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
     Properties versionProps = loadProperties('version.properties')
     def versionCodeProperty = versionProps['VERSION_CODE'].toInteger()
     defaultConfig {
         applicationId "com.vaxapp.thingspeakviewer"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
         versionCode versionCodeProperty
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -42,9 +36,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+    namespace 'com.vaxapp.thingspeakviewer'
 }
 
 private Properties loadProperties(String fileName) {
@@ -78,7 +77,7 @@ dependencies {
     implementation appDependencies.converterGson
     implementation appDependencies.okHttp
     implementation(appDependencies.crashlytics) {
-        transitive = true;
+        transitive = true
     }
 
     testImplementation testDependencies.jUnit

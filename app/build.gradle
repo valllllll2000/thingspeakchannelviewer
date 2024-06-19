@@ -7,7 +7,7 @@ android {
     Properties versionProps = loadProperties('version.properties')
     def versionCodeProperty = versionProps['VERSION_CODE'].toInteger()
     defaultConfig {
-        applicationId "com.vaxapp.thingspeakviewer"
+        applicationId "com.vaxapp.thingspeak.viewer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
         versionCode versionCodeProperty
@@ -44,7 +44,7 @@ android {
         viewBinding = true
         compose true
     }
-    namespace 'com.vaxapp.thingspeakviewer'
+    namespace 'com.vaxapp.thingspeak.viewer'
     kotlinOptions {
         jvmTarget = '1.8'
     }

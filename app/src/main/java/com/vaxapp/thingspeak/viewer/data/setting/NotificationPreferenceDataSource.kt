@@ -1,6 +1,6 @@
 package com.vaxapp.thingspeak.viewer.data.setting
 
-class NotificationPreferenceDataSource(val store: PreferenceStore) {
+class NotificationPreferenceDataSource(private val store: PreferenceStore) {
 
     companion object {
         const val SETTING_KEY = "enable_notification"

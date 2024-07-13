@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
     }
 
     override fun showLoading() {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO("not implemented")
     }
 
     override fun hideLoading() {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO("not implemented")
     }
 
     @SuppressLint("SetTextI18n")

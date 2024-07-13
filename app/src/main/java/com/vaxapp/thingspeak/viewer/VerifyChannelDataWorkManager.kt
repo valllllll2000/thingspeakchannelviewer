@@ -6,13 +6,13 @@ import androidx.work.WorkerParameters
 import com.vaxapp.thingspeak.viewer.domain.DomainResponse
 import com.vaxapp.thingspeak.viewer.domain.GetNotificationPreferenceUseCase
 import com.vaxapp.thingspeak.viewer.domain.GetOfficeWeatherUseCase
+import com.vaxapp.thingspeak.viewer.domain.channelDataTooOld
 import com.vaxapp.thingspeak.viewer.view.NotificationHelper
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.koin.core.component.inject
 import org.koin.core.component.KoinComponent
-import java.util.Date
+import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 
 class VerifyChannelDataWorkManager(
@@ -42,8 +42,7 @@ class VerifyChannelDataWorkManager(
     }
 
     private fun useResult(result: DomainResponse) {
-        val channelUpdateTime = result.feeds.first().createdAt?.time ?: 0L
-        if (Date().time - channelUpdateTime > 360000L) {
+        if (result.channelDataTooOld()) {
             notificationHelper.showNotification(appContext)
         }
     }

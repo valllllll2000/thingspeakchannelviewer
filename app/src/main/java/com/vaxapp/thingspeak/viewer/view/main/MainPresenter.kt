@@ -3,6 +3,7 @@ package com.vaxapp.thingspeak.viewer.view.main
 import com.vaxapp.thingspeak.viewer.domain.DomainResponse
 import com.vaxapp.thingspeak.viewer.domain.GetNotificationPreferenceUseCase
 import com.vaxapp.thingspeak.viewer.domain.GetOfficeWeatherUseCase
+import com.vaxapp.thingspeak.viewer.domain.channelDataTooOld
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -27,8 +28,7 @@ class MainPresenter(
     }
 
     private fun useResult(result: DomainResponse) {
-        val channelUpdateTime = result.feeds.first().createdAt?.time ?: 0L
-        if (Date().time - channelUpdateTime > 360000L) {
+        if (result.channelDataTooOld()) {
             CoroutineScope(coroutineContext).launch {
                 val displayNotification =
                     getNotificationPreferenceUseCase.getNotificationPreference()

@@ -30,6 +30,8 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import android.Manifest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 
 class SettingsActivity : ComponentActivity() {
 
@@ -78,30 +80,34 @@ class SettingsActivity : ComponentActivity() {
 
 @Composable
 fun SettingsView(modifier: Modifier = Modifier, viewModel: SettingsViewModel) {
-    Text(
-        text = stringResource(R.string.settings_label),
-        modifier = modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
-    )
-    var checkedState = viewModel.displayNotification.collectAsState().value
-
-    Row(modifier = Modifier
-        .semantics {
-            stateDescription = if (checkedState) {
-                "Enabled"
-            } else {
-                "Disabled"
-            }
-            role = androidx.compose.ui.semantics.Role.Checkbox
-        }
-        .padding(start = 16.dp, top = 72.dp, bottom = 8.dp, end = 16.dp),
-        verticalAlignment = Alignment.CenterVertically) {
-
-        Checkbox(checked = checkedState, onCheckedChange = {
-            checkedState = it
-            viewModel.onSettingChanged(it)
-        })
+    Column(modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)) {
         Text(
-            text = "Notify channel data expired", modifier = Modifier.padding(start = 8.dp)
+            text = stringResource(R.string.settings_label),
+            style = MaterialTheme.typography.headlineLarge
         )
+        var checkedState = viewModel.displayNotification.collectAsState().value
+
+        Row(modifier = Modifier
+            .semantics {
+                stateDescription = if (checkedState) {
+                    "Enabled"
+                } else {
+                    "Disabled"
+                }
+                role = androidx.compose.ui.semantics.Role.Checkbox
+            }
+            .padding(top = 16.dp, bottom = 16.dp),
+            verticalAlignment = Alignment.CenterVertically) {
+
+            Checkbox(checked = checkedState, onCheckedChange = {
+                checkedState = it
+                viewModel.onSettingChanged(it)
+            })
+            Text(
+                text = stringResource(R.string.notify_channel_data_expired),
+                modifier = Modifier.padding(start = 8.dp),
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
     }
 }

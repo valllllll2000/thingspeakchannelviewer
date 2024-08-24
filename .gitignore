@@ -12,3 +12,5 @@ app/fabric.properties
 #fastlane
 Gemfile
 fastlane
+
+keys.properties

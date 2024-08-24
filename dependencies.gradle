@@ -21,7 +21,6 @@ ext {
     supportVersion = '1.0.0'
     timberVersion = '4.5.1'
     constraintVersion = '2.0.0-alpha2'
-    ankoVersion = '0.8.3'
     koinVersion = '1.0.1'
     crashlyticsVersion = '2.9.2@aar'
 
@@ -51,7 +50,6 @@ ext {
             recyclerView    : "androidx.recyclerview:recyclerview:${supportVersion}",
             material        : "com.google.android.material:material:${supportVersion}",
             constraintLayout: "androidx.constraintlayout:constraintlayout:${constraintVersion}",
-            anko            : "org.jetbrains.anko:anko-common:${ankoVersion}",
             koin            : "org.koin:koin-android:${koinVersion}",
             retrofit        : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             adapterRxJava   : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",

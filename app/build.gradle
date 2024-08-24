@@ -14,6 +14,8 @@ android {
         versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        buildConfigField("String", "THINGSPEAK_API_KEY", "\"${getKeyProperty('THINGSPEAK_API_KEY')}\"")
     }
     signingConfigs {
         debug {
@@ -55,6 +57,18 @@ android {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
+    }
+}
+
+// Function to read properties from the file
+def getKeyProperty(key) {
+    Properties properties = new Properties()
+    File propertiesFile = rootProject.file('keys.properties')
+    if (propertiesFile.exists()) {
+        properties.load(propertiesFile.newDataInputStream())
+        return properties.getProperty(key)
+    } else {
+        return "" // Or handle the case when the file is missing
     }
 }
 
@@ -100,7 +114,6 @@ dependencies {
     implementation appDependencies.recyclerView
     implementation appDependencies.material
     implementation appDependencies.constraintLayout
-    implementation appDependencies.anko
     implementation appDependencies.retrofit
     implementation appDependencies.adapterRxJava
     implementation appDependencies.converterGson

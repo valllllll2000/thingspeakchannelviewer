@@ -3,21 +3,20 @@ package com.vaxapp.thingspeak.viewer.view.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.vaxapp.thingspeak.viewer.R
 import com.vaxapp.thingspeak.viewer.view.NotificationHelper
 import com.vaxapp.thingspeak.viewer.view.settings.SettingsActivity
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.error
-import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
+
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
+class MainActivity : AppCompatActivity(), MainView {
 
     private val presenter: MainPresenter by inject()
     private val notificationHelper by inject<NotificationHelper>()
@@ -40,12 +39,12 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
     }
 
     override fun showError(error: Throwable) {
-        toast(getString(R.string.error_loading_toast))
+       Toast.makeText(this, getString(R.string.error_loading_toast), Toast.LENGTH_LONG).show()
         error(error)
     }
 
     override fun displayNotification() {
-        info("ask to display notification")
+        Log.i("MainActivity","ask to display notification")
         notificationHelper.showNotification(this)
     }
 
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger, MainView {
 
     @SuppressLint("SetTextI18n")
     override fun display(response: ViewResponse) {
-        info("channel $response")
+        Log.i("MainActivity","channel $response")
         descriptionTv.text = response.description
         field1Content.text = "${response.field1Value} %"
         field2Content.text = "${response.field2Value} ºC"

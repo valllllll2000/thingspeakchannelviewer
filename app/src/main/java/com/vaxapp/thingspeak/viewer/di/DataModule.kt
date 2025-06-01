@@ -2,9 +2,9 @@ package com.vaxapp.thingspeak.viewer.di
 
 import android.content.Context
 import com.vaxapp.thingspeak.viewer.data.ApiService
-import com.vaxapp.thingspeak.viewer.data.DataOfficeWeatherRepository
-import com.vaxapp.thingspeak.viewer.data.DomainResponseMapper
-import com.vaxapp.thingspeak.viewer.data.OfficeWeatherCloudDataSource
+import com.vaxapp.thingspeak.viewer.data.weather.DataOfficeWeatherRepository
+import com.vaxapp.thingspeak.viewer.data.weather.DomainResponseMapper
+import com.vaxapp.thingspeak.viewer.data.weather.OfficeWeatherCloudDataSource
 import com.vaxapp.thingspeak.viewer.domain.OfficeWeatherRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module

@@ -11,11 +11,12 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
         versionCode versionCodeProperty
-        versionName "1.1"
+        versionName "1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        buildConfigField("String", "THINGSPEAK_API_KEY", "\"${getKeyProperty('THINGSPEAK_API_KEY')}\"")
+        buildConfigField("String", "THINGSPEAK_WEATHER_API_KEY", "\"${getKeyProperty('THINGSPEAK_WEATHER_API_KEY')}\"")
+        buildConfigField("String", "THINGSPEAK_IP_API_KEY", "\"${getKeyProperty('THINGSPEAK_IP_API_KEY')}\"")
     }
     signingConfigs {
         debug {

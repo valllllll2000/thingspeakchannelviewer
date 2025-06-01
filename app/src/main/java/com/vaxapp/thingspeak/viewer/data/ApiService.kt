@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import com.vaxapp.thingspeak.viewer.BuildConfig
+import com.vaxapp.thingspeak.viewer.data.ip.IpResponse
+import com.vaxapp.thingspeak.viewer.data.weather.WeatherResponse
 import io.reactivex.Single
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -17,13 +19,17 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("https://api.thingspeak.com/channels/$CHANNEL_ID/feeds.json?results=1&api_key=${BuildConfig.THINGSPEAK_API_KEY}")
-    fun fetchFields(): Single<ApiResponse>
+    @GET("https://api.thingspeak.com/channels/$CHANNEL_ID/feeds.json?results=1&api_key=${BuildConfig.THINGSPEAK_WEATHER_API_KEY}")
+    fun fetchFields(): Single<WeatherResponse>
+
+    @GET("https://api.thingspeak.com/channels/$IP_CHANNEL_ID/fields/1.json?api_key=${BuildConfig.THINGSPEAK_IP_API_KEY}&results=1")
+    fun fetchIp(): Single<IpResponse>
 
     companion object {
 
         private const val CHANNEL_ID = 2405092
         private const val CHANNEL_ID_OLD = 298096
+        private const val IP_CHANNEL_ID = 2635523
 
         private val REWRITE_RESPONSE_INTERCEPTOR = Interceptor { chain ->
             val originalResponse = chain.proceed(chain.request())

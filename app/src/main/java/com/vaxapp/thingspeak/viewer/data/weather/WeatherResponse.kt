@@ -1,6 +1,6 @@
-package com.vaxapp.thingspeak.viewer.data
+package com.vaxapp.thingspeak.viewer.data.weather
 
-data class ApiResponse(
+data class WeatherResponse(
     val channel: Channel,
     val feeds: List<Feed>
 )

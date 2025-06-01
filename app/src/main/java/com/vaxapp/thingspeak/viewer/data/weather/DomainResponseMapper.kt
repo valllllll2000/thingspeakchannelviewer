@@ -1,4 +1,4 @@
-package com.vaxapp.thingspeak.viewer.data
+package com.vaxapp.thingspeak.viewer.data.weather
 
 import com.vaxapp.thingspeak.viewer.domain.DomainChannel
 import com.vaxapp.thingspeak.viewer.domain.DomainFeed
@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat
 
 class DomainResponseMapper(private val serverDateFormat: SimpleDateFormat) {
 
-    fun toDomainResponse(it: ApiResponse) = DomainResponse(
+    fun toDomainResponse(it: WeatherResponse) = DomainResponse(
         DomainChannel(
             it.channel.field1,
             it.channel.field2,

@@ -78,8 +78,8 @@ class WeatherAppWidget : AppWidgetProvider(), KoinComponent {
             R.layout.new_app_widget)
         val response = mapper.toViewResponse(result)
         views.setTextViewText(R.id.descriptionTv, response.description)
-        views.setTextViewText(R.id.field1Content, "${response.field1Value} %")
-        views.setTextViewText(R.id.field2Content, "${response.field2Value} ºC")
+        views.setTextViewText(R.id.field1Content, "${response.humidity} %")
+        views.setTextViewText(R.id.field2Content, "${response.temperature} ºC")
         views.setTextViewText(R.id.updatedTv,
             context.getString(R.string.last_updated_at, response.channelUpdateDate))
 

@@ -1,4 +1,4 @@
-package com.vaxapp.thingspeak.viewer.data
+package com.vaxapp.thingspeak.viewer.data.weather
 
 import com.vaxapp.thingspeak.viewer.domain.DomainResponse
 import com.vaxapp.thingspeak.viewer.domain.OfficeWeatherRepository
@@ -10,7 +10,7 @@ class DataOfficeWeatherRepository(
 ) : OfficeWeatherRepository {
 
     override fun getOfficeWeather(): Single<DomainResponse> {
-        return dataSource.fetchFields().map {
+        return dataSource.fetchWeather().map {
             mapper.toDomainResponse(it)
         }
     }
